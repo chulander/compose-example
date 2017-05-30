@@ -1,0 +1,24 @@
+{
+  "name": "compose-example",
+  "version": "0.0.1",
+  "description": "function programming composition example",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chulander/compose-example.git"
+  },
+  "author": "chulander (bryan.chu.info)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chulander/compose-example/issues"
+  },
+  "homepage": "https://github.com/chulander/compose-example#readme",
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
+    "standard": "^10.0.2"
+  }
+}
