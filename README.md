@@ -19,19 +19,19 @@ const {composer} = require('./index')
 const a1 = [1, 2, 3, 4, 5]
 const a2 = [6, 7, 8, 9, 10]
 const sumVariableNumbers = (conditionalNumber) => (...i) => i.slice(0, conditionalNumber).reduce((c, n) => c + n, 0)
-const doubleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
+const multipleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
 
 // configuration object way
 const configOptions = {
     numbers: [a1, a2],
     outputFunc: sumVariableNumbers(2),
-    conditionalFunc: doubleConditional(2),
+    conditionalFunc: multipleConditional(2),
 }
 const result = composer(configOptions)
 
 
 // argument list way
-const result2 = composer(doubleConditional(2), sumVariableNumbers(2), a1,a2)
+const result2 = composer(multipleConditional(2), sumVariableNumbers(2), a1,a2)
 ```
 
 "npm run test" to see some examples 

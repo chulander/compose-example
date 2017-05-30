@@ -7,12 +7,12 @@ const a3 = [18, 20, 22, 24, 26, 28, 30]
 const a4 = [54, 72]
 const a5 = [36, 40, 44, 48, 52, 56, 60]
 const sumVariableNumbers = (conditionalNumber) => (...i) => i.slice(0, conditionalNumber).reduce((c, n) => c + n, 0)
-const doubleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
+const multipleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
 const evenConditional = (a, b) => a % 2 === 0 && b % 2 === 0
 const greaterThanConditional = (conditionalNumber) => (a, b) => a >= conditionalNumber && b >= conditionalNumber
 const compositeConditional = (multiplierNumber, greaterThanNumber) => {
   return (a, b) => {
-    return doubleConditional(multiplierNumber)(a, b) &&
+    return multipleConditional(multiplierNumber)(a, b) &&
       greaterThanConditional(greaterThanNumber)(a, b) &&
       evenConditional(a, b)
   }
@@ -24,7 +24,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
       const result = composer(configOptions)
       expect(result).to.be.an('array').that.includes(9, 12, 15)
@@ -33,7 +33,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2],
         outputFunc: sumVariableNumbers(2),
-        // conditionalFunc: doubleConditional(2),
+        // conditionalFunc: multipleConditional(2),
       }
 
       expect(function () {
@@ -51,7 +51,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2],
         // outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
 
       expect(function () {
@@ -70,7 +70,7 @@ describe('Composer', () => {
       const configOptions = {
         // numbers: [a1, a2],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
 
       expect(function () {
@@ -87,7 +87,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
       expect(composer(configOptions)).to.be.an('array').that.is.empty
     })
@@ -95,7 +95,7 @@ describe('Composer', () => {
 
   describe('Passing in a comma-separated argument list', () => {
     it('expects comma-delimited arguments as an alternative', () => {
-      const result = composer(doubleConditional(2), sumVariableNumbers(2), a1, a2)
+      const result = composer(multipleConditional(2), sumVariableNumbers(2), a1, a2)
       expect(result).to.be.an('array').that.includes(9, 12, 15)
     })
     it('expect an error to be throw if conditionalFunc not a function', () => {
@@ -110,25 +110,25 @@ describe('Composer', () => {
     })
     it('expect an error to be throw if outputFunc not a function', () => {
       expect(function () {
-        const result = composer(doubleConditional(2), undefined, a1, a2)
+        const result = composer(multipleConditional(2), undefined, a1, a2)
       }).to.throw(TypeError)
 
       expect(function () {
-        const result = composer(doubleConditional(2), 1, a1, a2)
+        const result = composer(multipleConditional(2), 1, a1, a2)
       }).to.throw(TypeError)
 
     })
     it('expect an error to be throw if numbers not an array', () => {
       expect(function () {
-        const result = composer(doubleConditional(2), sumVariableNumbers(2), undefined)
+        const result = composer(multipleConditional(2), sumVariableNumbers(2), undefined)
       }).to.throw(TypeError)
 
       expect(function () {
-        const result = composer(doubleConditional(2), sumVariableNumbers(2), 1)
+        const result = composer(multipleConditional(2), sumVariableNumbers(2), 1)
       }).to.throw(TypeError)
     })
     it('expects an empty array returned if only a single array is passed at the 3rd argument (argument list ===3)', () => {
-      expect(composer(doubleConditional(2), sumVariableNumbers(2), a1)).to.be.an('array').that.is.empty
+      expect(composer(multipleConditional(2), sumVariableNumbers(2), a1)).to.be.an('array').that.is.empty
     })
   })
   describe('Accuracy Test - conditionalFunc=(a * 2) === b | outputFunc=a+b', () => {
@@ -136,7 +136,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
       const result = composer(configOptions)
       expect(result).to.be.an('array').to.have.members([9, 12, 15])
@@ -145,7 +145,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2, a3],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
       const result = composer(configOptions)
       // console.log('what is result', result)
@@ -155,7 +155,7 @@ describe('Composer', () => {
       const configOptions = {
         numbers: [a1, a2, a3, a4],
         outputFunc: sumVariableNumbers(2),
-        conditionalFunc: doubleConditional(2),
+        conditionalFunc: multipleConditional(2),
       }
       const result = composer(configOptions)
       expect(result).to.be.an('array').to.have.members([81, 108])
