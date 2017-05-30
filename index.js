@@ -1,14 +1,18 @@
 'use strict'
 function composer (config, outputFunc, ...numberArrays) {
+  let configMissingProps
   const conditionalFunction = config && config.conditionalFunc ? config.conditionalFunc : config
   const outputFunction = config && config.outputFunc ? config.outputFunc : outputFunc
+  const functionCallType = typeof config === 'object' ? 'configObject' : 'argumentList'
 
+
+  ///////////////////////////////////////////////////////////
+  // helper function  ///////////////////////////////////////
+  ///////////////////////////////////////////////////////////
   const _reducerHelper = (array1, array2) => {
     return array1.reduce((c, n) => {
       return array2.reduce((cur, next) => {
         if (conditionalFunction(n, next)) {
-          // console.log("what is n", n)
-          // console.log("what is next", next)
           const output = outputFunction(n, next)
           cur.push(output)
         }
@@ -17,17 +21,18 @@ function composer (config, outputFunc, ...numberArrays) {
     }, [])
   }
 
-  const functionCallType = typeof config === 'object' ? 'configObject' : 'argumentList'
+  ///////////////////////////////////////////////////////////
+  // error handling start  //////////////////////////////////
+  ///////////////////////////////////////////////////////////
 
-  let configMissingProps
   // checks if first parameter is an object
   if (typeof config === 'object') {
-    if (!config.conditionalFunc || (config && typeof config.conditionalFunc !== 'function')){
+    if (!config.conditionalFunc || (config && typeof config.conditionalFunc !== 'function')) {
       configMissingProps = Object.assign({}, {
         conditionalFunc: 'missing or is not a function'
       })
     }
-    if (!config.outputFunc || (config && typeof config.outputFunc !== 'function')){
+    if (!config.outputFunc || (config && typeof config.outputFunc !== 'function')) {
       configMissingProps = Object.assign({}, configMissingProps, {
         outputFunc: 'missing or is not a function'
       })
@@ -63,6 +68,10 @@ function composer (config, outputFunc, ...numberArrays) {
   if (configMissingProps) {
     throw new TypeError(`composer: calling with ${functionCallType} - Missing required ${functionCallType === 'configObject' ? 'properties' : 'argument(s)'} ${JSON.stringify(configMissingProps)}`)
   }
+
+  ///////////////////////////////////////////////////////////
+  // logic handling  start  /////////////////////////////////
+  ///////////////////////////////////////////////////////////
 
   // clone array to prevent mutation via pass-by-reference (it's a shallow copy)
   // since Javascript objects are by reference
