@@ -76,6 +76,7 @@ describe('Composer', () => {
       expect(function () {
         const result = composer(configOptions)
       }).to.throw(TypeError)
+
       expect(function () {
         const result = composer(Object.assign({}, configOptions, {
             numbers: 1

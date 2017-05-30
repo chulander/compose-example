@@ -19,9 +19,9 @@ function composer (config, outputFunc, ...numberArrays) {
 
   const functionCallType = typeof config === 'object' ? 'configObject' : 'argumentList'
 
+  let configMissingProps
   // checks if first parameter is an object
   if (typeof config === 'object') {
-    let configMissingProps
     if (!config.conditionalFunc || (config && typeof config.conditionalFunc !== 'function')){
       configMissingProps = Object.assign({}, {
         conditionalFunc: 'missing or is not a function'
@@ -38,19 +38,29 @@ function composer (config, outputFunc, ...numberArrays) {
       })
     }
 
-    if (configMissingProps) {
-      throw new TypeError(`composer: calling with config object - Missing required properties ${JSON.stringify(configMissingProps)}`)
-    }
-
   }
   // assume that comma separated arguments were passed
   else {
-    if (typeof config !== 'function' || typeof outputFunc !== 'function') {
-      throw new TypeError(`composer: calling with argument list - Missing conditionalFunc and/or outputFunc argument`)
+    if (typeof config !== 'function') {
+      configMissingProps = Object.assign({}, {
+        conditionalFunc: 'missing or is not a function'
+      })
     }
-    if (!Array.isArray(numberArrays[0])) {
-      throw new TypeError(`composer: calling with argument list - 3rd argument is not an array`)
+    if (typeof outputFunc !== 'function') {
+      configMissingProps = Object.assign({}, configMissingProps, {
+        outputFunc: 'missing or is not a function'
+      })
+      // throw new TypeError(`composer: calling with argument list - Missing conditionalFunc and/or outputFunc argument`)
     }
+    if (numberArrays && !Array.isArray(numberArrays[0])) {
+      configMissingProps = Object.assign({}, configMissingProps, {
+        numbers: '3rd argument is not an array'
+      })
+    }
+  }
+
+  if (configMissingProps) {
+    throw new TypeError(`composer: calling with ${functionCallType} - Missing required ${functionCallType === 'configObject' ? 'properties' : 'argument(s)'} ${JSON.stringify(configMissingProps)}`)
   }
 
   const cloneArrays = functionCallType === 'configObject' ? config.numbers.slice(0) : numberArrays.slice(0)
