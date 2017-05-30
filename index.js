@@ -48,18 +48,18 @@ function composer (config, outputFunc, ...numberArrays) {
   else {
     if (typeof config !== 'function') {
       configMissingProps = Object.assign({}, {
-        conditionalFunc: 'missing or is not a function'
+        conditionalFunc: '1st argument is missing or is not a function'
       })
     }
     if (typeof outputFunc !== 'function') {
       configMissingProps = Object.assign({}, configMissingProps, {
-        outputFunc: 'missing or is not a function'
+        outputFunc: '2nd argument is missing or is not a function'
       })
       // throw new TypeError(`composer: calling with argument list - Missing conditionalFunc and/or outputFunc argument`)
     }
     if (numberArrays && !Array.isArray(numberArrays[0])) {
       configMissingProps = Object.assign({}, configMissingProps, {
-        numbers: '3rd argument is not an array'
+        numbers: '3rd argument is missing or is not an array'
       })
     }
   }
