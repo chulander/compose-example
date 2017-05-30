@@ -1,17 +1,12 @@
 # Functional Programming - Compose
 ### Composer
-The composer object accepts following:
-1. conditionalFunc (a function with (a,b) arguments that applies some condition)
-2. outputFunc (a function with (a,b) arguments that aggregates the two)
-3. numbers (an array of numbers)
+The composer object accepts the following proper names and value types:
+1. conditionalFunc: function (a,b) that applies a condition on a & b arguments
+2. outputFunc: function (a,b) that applies an aggregation on a & b arguments
+3. numbers: array of [numbers]
 
 You may call the composer with the following signature
-composer(configurationObject) or composer(conditionalFunc,outputFunc, array1,array2, arrayN......)
-
-If a configuration object is passed, the properties must be as follows:
-   1. outputFunc (function with (a,b) arguments)
-   2. conditionalFunc (function with (a,b) arguments)
-   3. numbers (array)
+composer(configurationObject) or composer(conditionalFunc,outputFunc, array1,array2, ...arrayN)
    
 ```javascript 1.8
 const {composer} = require('./index')
