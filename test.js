@@ -2,7 +2,6 @@ const {composer} = require('./index')
 const {expect} = require('chai')
 
 const a1 = [1, 2, 3, 4, 5]
-
 const a2 = [6, 7, 8, 9, 10]
 const a3 = [18, 20, 22, 24, 26, 28, 30]
 const a4 = [54, 72]
