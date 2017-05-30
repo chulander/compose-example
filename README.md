@@ -33,3 +33,5 @@ const result = composer(configOptions)
 // argument list way
 const result2 = composer(doubleConditional(2), sumVariableNumbers(2), a1,a2)
 ```
+
+"npm run test" to see some examples 
