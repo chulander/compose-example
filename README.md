@@ -18,7 +18,7 @@ const {composer} = require('./index')
 
 const a1 = [1, 2, 3, 4, 5]
 const a2 = [6, 7, 8, 9, 10]
-const sumVariableNumbers = (n) => (...i) => i.slice(0, n).reduce((c, n) => c + n, 0)
+const sumVariableNumbers = (conditionalNumber) => (...i) => i.slice(0, conditionalNumber).reduce((c, n) => c + n, 0)
 const doubleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
 
 // configuration object way

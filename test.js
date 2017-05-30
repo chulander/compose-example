@@ -6,7 +6,7 @@ const a2 = [6, 7, 8, 9, 10]
 const a3 = [18, 20, 22, 24, 26, 28, 30]
 const a4 = [54, 72]
 const a5 = [36, 40, 44, 48, 52, 56, 60]
-const sumVariableNumbers = (n) => (...i) => i.slice(0, n).reduce((c, n) => c + n, 0)
+const sumVariableNumbers = (conditionalNumber) => (...i) => i.slice(0, conditionalNumber).reduce((c, n) => c + n, 0)
 const doubleConditional = (conditionalNumber) => (a, b) => a * conditionalNumber === b
 const evenConditional = (a, b) => a % 2 === 0 && b % 2 === 0
 const greaterThanConditional = (conditionalNumber) => (a, b) => a >= conditionalNumber && b >= conditionalNumber
