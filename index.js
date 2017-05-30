@@ -59,12 +59,16 @@ function composer (config, outputFunc, ...numberArrays) {
     }
   }
 
+  // throw error if configMissingProps is truthy
   if (configMissingProps) {
     throw new TypeError(`composer: calling with ${functionCallType} - Missing required ${functionCallType === 'configObject' ? 'properties' : 'argument(s)'} ${JSON.stringify(configMissingProps)}`)
   }
 
+  // clone array to prevent mutation via pass-by-reference (it's a shallow copy)
+  // since Javascript objects are by reference
   const cloneArrays = functionCallType === 'configObject' ? config.numbers.slice(0) : numberArrays.slice(0)
-  // console.log('what is cloneArray', cloneArrays)
+
+  // only run recursive iteration if there's at least 2 elements
   if (cloneArrays.length >= 2) {
     const array1 = cloneArrays.shift()
     const array2 = cloneArrays.shift()
@@ -78,8 +82,8 @@ function composer (config, outputFunc, ...numberArrays) {
         : composer(config, outputFunc, resultArray, ...cloneArrays)
       : resultArray
   }
+  // returns empty array if there's only 1
   else {
-    // returns empty array if there's only 1
     return []
   }
 }
