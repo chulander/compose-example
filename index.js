@@ -113,22 +113,3 @@ function composer (config, outputFunc, ...numberArrays) {
 module.exports = {
   composer,
 }
-
-const b1 = [4, 6, 10]
-const b2 = [8, 12, 20]
-const b3 = [16, 24, 40]
-const b4 = [32, 48, 80]
-const sumVariableNumbers = (conditionalNumber) => (...i) => i.slice(0,
-  conditionalNumber).reduce((c, n) => c + n, 0)
-const multipleConditional = (conditionalNumber) => (...i) => i.slice(0).
-reduce((c, n, index) => {
-  return (index === 0 || c * conditionalNumber === n) ? n : false
-})
-
-const r = composer({
-  conditionalFunc: multipleConditional(2),
-  outputFunc: sumVariableNumbers(4),
-  numbers: [b1, b2, b3, b4],
-})
-
-console.log('what is r', r)
