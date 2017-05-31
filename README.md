@@ -6,7 +6,7 @@ The *composer* function compares an array of numbers to other arrays of numbers 
 For example, if you have 3 arrays **[ 2,6,8 ]**, **[ 4,10,12 ]**, **[ 8,16,24 ]** and want to add only numbers from each array that is 2x the value of the previous number, the resulting array is **[ 14,42 ]** because 2+4+8=14 and 6+12+24 = 42 
 
 
-##Usage
+## Usage
 You may call the composer with the 1 of the 2 signatures:
 1. composer(configurationObject)
 2. composer(conditionalFunc, outputFunc, array1, array2, ...arrayN)
